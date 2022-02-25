@@ -45,22 +45,22 @@ app.get('/auth/google',
 
 app.get( '/auth/google/callback',
 	passport.authenticate( 'google', {
-		
+		successRedirect:'https://koovs.com/',
 		failureRedirect: '/auth/google/failure'
-}),(req,res)=>{
+    }),(req,res)=>{
         
         res.send({user:req.user, token})
 
         res.send(req.user)
-    }
+       }
 
 );
 
-const port=process.env.PORT||5000
+const port=process.env.PORT||2345;
 
 app.listen(port,async function(){
     try{
-        console.log(process.env)
+        
         await connect();
         console.log("listining on port 2345")
 
