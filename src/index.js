@@ -1,5 +1,7 @@
 const express= require("express")
 const app=express()
+require("dotenv").config()
+
 
 
 
@@ -14,7 +16,9 @@ const {register, login,newToken}= require("./controller/auth.controller")
 app.use(express.json())
 
 
-
+app.get("",(req,res)=>{
+    res.send("hello")
+})
 app.post("/register",register);
 app.post("/login",login);
 
@@ -44,7 +48,7 @@ app.get( '/auth/google/callback',
 		
 		failureRedirect: '/auth/google/failure'
 }),(req,res)=>{
-        const token=newToken(req.user)
+        
         res.send({user:req.user, token})
 
         res.send(req.user)
@@ -52,10 +56,11 @@ app.get( '/auth/google/callback',
 
 );
 
+const port=process.env.PORT||5000
 
-
-app.listen(2345,async function(){
+app.listen(port,async function(){
     try{
+        console.log(process.env)
         await connect();
         console.log("listining on port 2345")
 
