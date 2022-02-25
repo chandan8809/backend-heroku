@@ -21,7 +21,7 @@ passport.use(new GoogleStrategy({
 
         })
     }
-    console.log("user:",user)
+    
     return done(null, user)
   }
 ));
